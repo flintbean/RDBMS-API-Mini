@@ -18,6 +18,19 @@ server.get('/zoos', (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
+server.get('/zoos/:id', (req, res) => {
+  const id = req.params.id;
+
+  db('zoos')
+    .where({ id: Number(id) })
+    .then(zoos => {
+      res.status(200).json(zoos);
+    })
+    .catch(err => res.status(500).json(err))
+
+})
+
+
 server.post('/zoos', (req, res) => {
   const zoo = req.body;
 
